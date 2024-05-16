@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.5.6</version> <!-- lookup parent from repository -->
+	</parent>
+
+	<groupId>com.iss.hanson</groupId>
+	<artifactId>app-service-hanson</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<description>generate by app-service-hanson</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+		<lombok.version>1.16.22</lombok.version>
+		<jackson.version>2.9.7</jackson.version>
+		<skywalking.version>6.1.0</skywalking.version>
+		<hutool.version>5.8.6</hutool.version>
+		<mybatis-plus.version>3.4.1</mybatis-plus.version>
+		<mybatis-plus.starter.version>3.1.2</mybatis-plus.starter.version>
+		<org.apache.commons.version>3.8.1</org.apache.commons.version>
+		<swagger.version>2.9.2</swagger.version>
+		<swagger-annotations.version>1.5.21</swagger-annotations.version>
+		<swagger-models.version>1.5.21</swagger-models.version>
+		<swagger-boost-ui.version>1.9.6</swagger-boost-ui.version>
+		<fastjson.version>1.2.61</fastjson.version>
+		<mysql-connector-java.version>8.0.22</mysql-connector-java.version>
+		<druid-spring-boot-starter.version>1.1.9</druid-spring-boot-starter.version>
+		<spring-starter.version>2.4.1</spring-starter.version>
+		<mybatis-generator-core.version>1.3.5</mybatis-generator-core.version>
+		<hanson.mybatis-boost.version>1.1.1</hanson.mybatis-boost.version>
+		<hanson.rest-common.version>1.1.1</hanson.rest-common.version>
+		<com.aliyun.oss.version>3.14.0</com.aliyun.oss.version>
+		<weixin-java-cp.version>4.4.0</weixin-java-cp.version>
+		<xxl-job.version>2.3.1</xxl-job.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>io.swagger</groupId>
+			<artifactId>swagger-annotations</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.skywalking</groupId>
+			<artifactId>apm-toolkit-logback-1.x</artifactId>
+		</dependency>
+	</dependencies>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.iss.hanson</groupId>
+				<artifactId>app-service-hanson-common</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.iss.hanson</groupId>
+				<artifactId>app-service-hanson-service</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.iss.hanson</groupId>
+				<artifactId>app-service-hanson-dao</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+
+			<!--spring-->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-quartz</artifactId>
+				<version>${spring-starter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-test</artifactId>
+				<scope>test</scope>
+				<version>${spring-starter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>${spring-starter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-aop</artifactId>
+				<version>${spring-starter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-validation</artifactId>
+				<version>${spring-starter.version}</version>
+			</dependency>
+			<!--swagger-->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${swagger.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-annotations</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>io.swagger</groupId>
+						<artifactId>swagger-models</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-annotations</artifactId>
+				<version>${swagger-annotations.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.swagger</groupId>
+				<artifactId>swagger-models</artifactId>
+				<version>${swagger-models.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.xiaoymin</groupId>
+				<artifactId>swagger-bootstrap-ui</artifactId>
+				<version>${swagger-boost-ui.version}</version>
+			</dependency>
+			<!--swagger-->
+			<!--lombok-->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<optional>true</optional>
+				<version>${lombok.version}</version>
+			</dependency>
+			<!--tool-->
+			<dependency>
+				<groupId>cn.hutool</groupId>
+				<artifactId>hutool-all</artifactId>
+				<version>${hutool.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${org.apache.commons.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.skywalking</groupId>
+				<artifactId>apm-toolkit-logback-1.x</artifactId>
+				<version>${skywalking.version}</version>
+			</dependency>
+			<!--db-->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus.starter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-annotation</artifactId>
+				<version>${mybatis-plus.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-core</artifactId>
+				<version>${mybatis-plus.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-extension</artifactId>
+				<version>${mybatis-plus.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql-connector-java.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>${druid-spring-boot-starter.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hanson</groupId>
+				<artifactId>mybatis-boost</artifactId>
+				<version>${hanson.mybatis-boost.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.hanson</groupId>
+				<artifactId>rest-common</artifactId>
+				<version>${hanson.rest-common.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.aliyun.oss</groupId>
+				<artifactId>aliyun-sdk-oss</artifactId>
+				<version>${com.aliyun.oss.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.github.binarywang</groupId>
+				<artifactId>weixin-java-cp</artifactId>
+				<version>${weixin-java-cp.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.xuxueli</groupId>
+				<artifactId>xxl-job-core</artifactId>
+				<version>${xxl-job.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+
+	<profiles>
+		<profile>
+			<id>rdc</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<repositories>
+				<repository>
+					<id>rdc-releases</id>
+					<url>https://packages.aliyun.com/maven/repository/2153987-release-D71Es6/</url>
+				</repository>
+				<repository>
+					<id>rdc-snapshots</id>
+					<url>https://packages.aliyun.com/maven/repository/2153987-snapshot-XpgTYL/</url>
+				</repository>
+			</repositories>
+			<distributionManagement>
+				<repository>
+					<id>rdc-releases</id>
+					<url>https://packages.aliyun.com/maven/repository/2153987-release-D71Es6/</url>
+				</repository>
+				<snapshotRepository>
+					<id>rdc-snapshots</id>
+					<url>https://packages.aliyun.com/maven/repository/2153987-snapshot-XpgTYL/</url>
+				</snapshotRepository>
+			</distributionManagement>
+		</profile>
+	</profiles>
+
+<modules>
+	<module>app-service-hanson-common</module>
+    <module>app-service-hanson-client</module>
+    <module>app-service-hanson-api</module>
+    <module>app-service-hanson-dao</module>
+    <module>app-service-hanson-service</module>
+    <module>app-service-hanson-start</module>
+    <module>app-service-hanson-job</module>
+  </modules>
+</project>

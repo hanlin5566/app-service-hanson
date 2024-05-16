@@ -1,0 +1,50 @@
+#-------------------------------------------------------
+# 服务全局配置文件
+#-------------------------------------------------------
+# 重要说明
+# 所有环境均使用此区域的配置。外部资源如数据库连接等可配置为开发
+# 环境使用的值，测试环境、预发布环境、线上环境请务必通过Apollo
+# 配置中心进行配置，切勿在此文件中定义
+#-------------------------------------------------------
+
+spring:
+  application:
+    name: hanson-archetype
+  profiles:
+    active: dev
+  jackson:
+    #非null才序列化
+    default-property-inclusion: non_null
+  cache:
+    type: redis
+    caffeine:
+      #expireAfterAccess:多久没方位就失效,expireAfterWrite:多久没写入就失效,refreshAfterWrite:N秒后的下次一访问更新缓存.
+      #如果expireAfterWrite和expireAfterAccess同时存在，以expireAfterWrite为准。
+      spec: initialCapacity=50,maximumSize=500,expireAfterWrite=2h,refreshAfterWrite=3h
+  messages:
+    encoding: utf-8
+    # 国际化资源文件路径（配置文件路径）
+    basename: i18n/validations,i18n/startApplication
+mybatis-plus:
+  type-enums-package: com.hanson.mybatis.enums.**;com.iss.hanson.common.enums.**;
+  type-handlers-package: com.hanson.mybatis.handler.**
+  configuration:
+    DefaultEnumTypeHandler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+hanson:
+  cache:
+    ttl-minute: 10
+    enable: true
+  trace:
+    enable: true
+    slow:
+      milli: 5000
+
+
+swagger:
+  basic:
+    enable: true
+    username: admin
+    password: adam123!@#

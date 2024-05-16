@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>app-service-hanson</artifactId>
+    <groupId>com.iss.hanson</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>app-service-hanson-start</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.iss.hanson</groupId>
+      <artifactId>app-service-hanson-service</artifactId>
+    </dependency>
+    <!-- swagger -->
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-swagger2</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-annotations</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.swagger</groupId>
+      <artifactId>swagger-models</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.github.xiaoymin</groupId>
+      <artifactId>swagger-bootstrap-ui</artifactId>
+    </dependency>
+    <!-- swagger -->
+    <dependency>
+      <groupId>org.mybatis.generator</groupId>
+      <artifactId>mybatis-generator-core</artifactId>
+      <version>${mybatis-generator-core.version}</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <version>2.5</version>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+
+      <!-- mvn mybatis-generator:generate -->
+      <plugin>
+        <groupId>org.mybatis.generator</groupId>
+        <artifactId>mybatis-generator-maven-plugin</artifactId>
+        <version>1.3.2</version>
+        <configuration>
+          <verbose>true</verbose>
+          <overwrite>true</overwrite>
+          <configurationFile>src/main/resources/mbg/gen-table-config.xml</configurationFile>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-core</artifactId>
+            <version>${mybatis-generator-core.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+          </dependency>
+          <dependency>
+            <groupId>com.hanson</groupId>
+            <artifactId>mybatis-boost</artifactId>
+            <version>${hanson.mybatis-boost.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+
+      <!-- mybatis-plus generator 自动生成代码插件 -->
+      <plugin>
+        <groupId>com.hanson</groupId>
+        <artifactId>mybatis-plus-generator-maven-plugin</artifactId>
+        <version>1.1.1</version>
+        <configuration>
+          <configurationFile>src/main/resources/mbg/mbg_db_config.properties</configurationFile>
+        </configuration>
+      </plugin>
+      <!-- mybatis-plus generator 自动生成代码插件 -->
+    </plugins>
+  </build>
+</project>

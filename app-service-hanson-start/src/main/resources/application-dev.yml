@@ -1,0 +1,86 @@
+#-------------------------------------------------------
+# TEST环境配置区域
+#-------------------------------------------------------
+# 重要说明
+# 此配置区域仅在TEST环境中生效，只能定义测试环境中默认且长期不变
+# 的配置项，例如测试环境中的通用超时时间等，外部资源如数据库连接
+# 等请务必通过Apollo配置中心进行配置，切勿在此文件中定义
+#-------------------------------------------------------
+
+# ----- 日志级别配置 测试环境 -----
+server:
+  port: 8080
+
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://106.14.117.64:3306/tuitui?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai&useSSL=false&tinyInt1isBit=false
+      username: root
+      password: D7PTYSfZo5Ef
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initialSize: 3
+      minIdle: 2
+      maxActive: 25
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      keepAlive: true
+      maxPoolPreparedStatementPerConnectionSize: 50
+      filters: stat,wall,log4j2
+# redis配置
+  redis:
+    port: 6379
+    #    host: cheftalk-redis-stg.54xvis.0001.cnn1.cache.amazonaws.com.cn
+    # 目前官网无法联通aws redis,联通后需替换
+    host: 127.0.0.1
+    database: 0
+    pool:
+      max-idle: 8               ## 连接池中的最大空闲连接
+      min-idle: 1               ## 连接池中的最小空闲连接
+      max-active: 8             ## 连接池最大连接数（使用负值表示没有限制）
+      max-wait: -1              ## 连接池最大阻塞等待时间（使用负值表示没有限制）
+
+logging:
+  level:
+    root: INFO
+    org:
+      springframework: INFO
+
+com:
+  hanson:
+    user-interceptor:
+      excludePathPatterns: /favicon.ico,/file/upload,/api/v1/i18n,/wx/cp/portal
+    sign-filter:
+      excludePathPatterns: /favicon.ico,/file/upload,/api/v1/i18n,/wx/cp/portal
+hanson:
+  trace:
+    exclude: /file/upload
+
+aliyun:
+  oss:
+    bucketName: hanson-bucket
+    endPoint: oss-cn-shanghai.aliyuncs.com
+    accessKeyId: xxxx
+    accessKeySecret: xxxx
+    # 指定签名URL过期时间一年。
+    expiration-ms: 31536000000
+    defaultPath:
+    defaultModuleName: sys_file
+
+#企业微信配置
+wechat:
+  cp:
+    # 企业微信企业信息
+    corpId: xxxx
+    appConfigs:
+      #      通讯录同步
+      - aesKey: 111
+        agentId: 10000
+        secret: xxxxx
+        token: 111

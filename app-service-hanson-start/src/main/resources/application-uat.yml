@@ -1,0 +1,29 @@
+#-------------------------------------------------------
+# PREVIEW环境配置区域
+#-------------------------------------------------------
+# 重要说明
+# 此配置区域仅在PREVIEW环境中生效，只能定义测试环境中默认且长期
+# 不变的配置项，例如预览环境中的通用超时时间等，外部资源如数据库
+# 连接等请务必通过Apollo配置中心进行配置，切勿在此文件中定义
+#-------------------------------------------------------
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:mysql://xxx.xxx.xxx.xxx:3306/XXXX?characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false
+      username: root
+      password: D7PTYSfZo5Ef
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      initialSize: 15
+      minIdle: 10
+      maxActive: 200
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      keepAlive: true
+      maxPoolPreparedStatementPerConnectionSize: 50
+      filters: stat,wall,log4j2
